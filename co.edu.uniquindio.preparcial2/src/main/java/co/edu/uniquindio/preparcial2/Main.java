@@ -73,6 +73,58 @@ public class Main {
         }
     }
 
+    public static void crearTarea(FincaUQ fincaUQ) {
+        String idEmpleado=leerStringConsola("Ingrese el id del empleado:");
+        int numeroTarea=leerEntero("Ingrese el numero de la tarea: ");
+        double duracionTarea=leerDoubleConsola("Ingrese la duracion de la tarea: ");
+        String descripcion=leerStringConsola("Ingrese la descripcion de la tarea: ");
+
+        boolean resultado = fincaUQ.crearTarea(numeroTarea, duracionTarea, descripcion);
+
+        if (resultado) {
+            System.out.println("Tarea creada con exito");
+        } else {
+            System.out.println("Tarea no creada");
+        }
+    }
+
+    private static void eliminarTarea(FincaUQ fincaUQ) {
+        int idEliminar =leerEntero("Ingrese el numero de la tarea a eliminar:");
+        boolean resultado = fincaUQ.eliminarTarea(idEliminar);
+        if (resultado) {
+            System.out.println("Tarea eliminada con exito");
+        } else {
+            System.out.println("Tarea no eliminada");
+        }
+    }
+
+    private static void actualizarTarea(FincaUQ fincaUQ) {
+        String idEmpleado=leerStringConsola("Ingrese el id del empleado a actualizar:");
+        int numeroTarea=leerEntero("Ingrese el numero de la tarea: ");
+        double duracionTarea=leerDoubleConsola("Ingrese la duracion de la tarea: ");
+        String descripcion=leerStringConsola("Ingrese la descripcion de la tarea: ");
+
+        boolean resultado = fincaUQ.actualizarTarea(numeroTarea, duracionTarea, descripcion);
+
+
+        if (resultado) {
+            System.out.println("Tarea actualizada con exito");
+        } else {
+            System.out.println("Tarea no actualizada");
+        }
+    }
+
+    public static void obtenerTarea(FincaUQ fincaUQ) {
+        int idBuscar = leerEntero("Ingrese el numero de la tarea a buscar:");
+        Tarea resultado = fincaUQ.obtenerTarea(idBuscar);
+        if (resultado != null) {
+            System.out.println("Tarea encontrada con exito");
+        } else {
+            System.out.println("Tarea no encontrada");
+        }
+    }
+
+
     private static int leerEntero(String mensaje) {
         int dato = 0;
         String captura = "";

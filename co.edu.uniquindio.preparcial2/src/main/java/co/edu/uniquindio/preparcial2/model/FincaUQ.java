@@ -1,5 +1,6 @@
 package co.edu.uniquindio.preparcial2.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class FincaUQ {
@@ -99,4 +100,73 @@ public class FincaUQ {
 
         return empleadoEncontrado;
     }
+
+
+public boolean crearTarea(String idEmpleado, int numeroTarea,
+                             double duracionTarea,
+                             String descripcion) {
+
+    Tarea tareaEncontrada = obtenerTarea(numeroTarea);
+    if(tareaEncontrada == null) {
+        Tarea tarea = new Tarea();
+        tarea.setNumeroTarea(numeroTarea);
+        tarea.setDuracionTarea(duracionTarea);
+        tarea.setDescripcion(descripcion);
+        tarea.setFechaInicio(LocalDate.now());
+        tarea.setFechaFin(LocalDate.now());
+        getListaTareas().add(tarea);
+
+        Empleado empleadoEncontrado = obtenerEmpleado(idEmpleado);
+        if(empleadoEncontrado != null) {
+            tarea.setEmpleadoAsociado(empleadoEncontrado);
+            empleadoEncontrado.getListaTareasAsociadas().add(tarea);
+        }
+
+        return true;
+    }else{
+        return false;
+    }
+}
+
+public boolean eliminarTarea(int idEliminar) {
+    Tarea tareaEncontrada=obtenerTarea(idEliminar);
+    if(tareaEncontrada!=null) {
+        Empleado empleado = tareaEncontrada.getEmpleadoAsociado();
+        if (empleado != null) {
+            empleado.getListaTareasAsociadas().remove(tareaEncontrada);
+        }
+        getListaTareas().remove(tareaEncontrada);
+        return true;
+    } else {
+        return false;
+    }
+}
+public boolean actualizarTarea(int numeroTarea,
+                               double duracionTarea,
+                               String descripcion) {
+    Tarea tareaEncontrada = obtenerTarea(numeroTarea);
+    if(tareaEncontrada.getNumeroTarea()==numeroTarea) {
+        tareaEncontrada.setNumeroTarea(numeroTarea);
+        tareaEncontrada.setDuracionTarea(duracionTarea);
+        tareaEncontrada.setDescripcion(descripcion);
+        tareaEncontrada.setFechaInicio(LocalDate.now());
+        tareaEncontrada.setFechaFin(LocalDate.now());
+
+        return true;
+    }else{
+        return false;
+    }
+}
+
+public Tarea obtenerTarea(int idBuscar) {
+    Tarea tareaEncontrada =  null;
+    for (Tarea tarea : getListaTareas()) {
+        if(tarea.getNumeroTarea()==idBuscar) {
+            tareaEncontrada = tarea;
+            break;
+        }
+    }
+
+    return tareaEncontrada;
+}
 }
