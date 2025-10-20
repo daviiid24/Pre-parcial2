@@ -18,12 +18,28 @@ public class FincaUQ {
         this.nombre = nombre;
     }
 
+    public ArrayList<Tarea> getListaTareas() {
+        return listaTareas;
+    }
+
+    public void setListaTareas(ArrayList<Tarea> listaTareas) {
+        this.listaTareas = listaTareas;
+    }
+
+    public ArrayList<Empleado> getListaEmpleados() {
+        return listaEmpleados;
+    }
+
+    public void setListaEmpleados(ArrayList<Empleado> listaEmpleados) {
+        this.listaEmpleados = listaEmpleados;
+    }
+
     public boolean crearEmpleado(String nombre,
-                                  String apellido,
-                                  String cedula,
-                                  int edad,
-                                  double salario,
-                                  int numeroHorasTrabajo) {
+                                 String apellido,
+                                 String cedula,
+                                 int edad,
+                                 double salario,
+                                 int numeroHorasTrabajo) {
 
         Empleado empleadoEncontrado = obtenerEmpleado(cedula);
         if(empleadoEncontrado == null) {
@@ -34,7 +50,7 @@ public class FincaUQ {
             empleado.setEdad(edad);
             empleado.setSalario(salario);
             empleado.setNumeroHorasTrabajo(numeroHorasTrabajo);
-            listaEmpleados().add(empleado);
+            getListaEmpleados().add(empleado);
 
             return true;
         }else{
@@ -45,7 +61,7 @@ public class FincaUQ {
     public boolean eliminarEmpleado(String idEliminar) {
         Empleado empleadoEncontrado=obtenerEmpleado(idEliminar);
         if(empleadoEncontrado!=null) {
-            listaEmpleados().remove(empleadoEncontrado);
+            getListaEmpleados().remove(empleadoEncontrado);
             return true;
         } else {
             return false;
@@ -74,7 +90,7 @@ public class FincaUQ {
 
     public Empleado obtenerEmpleado(String idBuscar) {
         Empleado empleadoEncontrado =  null;
-        for (Empleado empleado : listaEmpleados()) {
+        for (Empleado empleado : getListaEmpleados()) {
             if(empleado.getCedula().equalsIgnoreCase(idBuscar)) {
                 empleadoEncontrado = empleado;
                 break;
