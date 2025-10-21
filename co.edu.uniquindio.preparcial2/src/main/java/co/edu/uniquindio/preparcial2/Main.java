@@ -79,7 +79,7 @@ public class Main {
         double duracionTarea=leerDoubleConsola("Ingrese la duracion de la tarea: ");
         String descripcion=leerStringConsola("Ingrese la descripcion de la tarea: ");
 
-        boolean resultado = fincaUQ.crearTarea(numeroTarea, duracionTarea, descripcion);
+        boolean resultado = fincaUQ.crearTarea(idEmpleado, numeroTarea, duracionTarea, descripcion);
 
         if (resultado) {
             System.out.println("Tarea creada con exito");
